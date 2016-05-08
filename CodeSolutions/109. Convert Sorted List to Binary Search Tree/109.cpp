@@ -1,0 +1,43 @@
+// Language: C++
+// Commit Timestamp: 2017-06-24T00:00:00+05:30
+// Solution Logic: Placeholder for explanation.
+
+// Language: C++
+// Commit Timestamp: 2017-06-24T00:00:00+05:30
+// Solution Logic: Placeholder for explanation.
+
+// Language: C++
+// Commit Timestamp: 2017-06-24T00:00:00+05:30
+// Solution Logic: Placeholder for explanation.
+
+class Solution {
+ public:
+  TreeNode* sortedListToBST(ListNode* head) {
+    if (head == nullptr)
+      return nullptr;
+    if (!head->next)
+      return new TreeNode(head->val);
+
+    ListNode* mid = findMid(head);
+    TreeNode* root = new TreeNode(mid->val);
+    root->left = sortedListToBST(head);
+    root->right = sortedListToBST(mid->next);
+    return root;
+  }
+
+ private:
+  ListNode* findMid(ListNode* head) {
+    ListNode* prev = nullptr;
+    ListNode* slow = head;
+    ListNode* fast = head;
+
+    while (fast != nullptr && fast->next != nullptr) {
+      prev = slow;
+      slow = slow->next;
+      fast = fast->next->next;
+    }
+    prev->next = nullptr;
+
+    return slow;
+  }
+};
